@@ -3,13 +3,13 @@ fn first() {
     let output = input
         .lines()
         .filter_map(|v| {
-            let sets: Vec<_> = v.split(":").collect();
+            let sets: Vec<_> = v.split(':').collect();
             let game_id = sets[0].split_whitespace().skip(1).collect::<Vec<_>>()[0];
             let game_id: usize = game_id.parse().unwrap();
             let sets = sets[1];
-            let sets = sets.split(";");
+            let sets = sets.split(';');
             for set in sets {
-                let items = set.split(",").map(|v| v.trim());
+                let items = set.split(',').map(str::trim);
                 for item in items {
                     let count_and_color: Vec<_> =
                         item.split_whitespace().filter(|v| !v.is_empty()).collect();
@@ -76,14 +76,14 @@ fn second() {
     let output = input
         .lines()
         .map(|v| {
-            let sets: Vec<_> = v.split(":").collect();
+            let sets: Vec<_> = v.split(':').collect();
             let game_id = sets[0].split_whitespace().skip(1).collect::<Vec<_>>()[0];
             let game_id: usize = game_id.parse().unwrap();
             let game_id = game_id - 1;
             let sets = sets[1];
-            let sets = sets.split(";");
+            let sets = sets.split(';');
             for set in sets {
-                let items = set.split(",").map(|v| v.trim());
+                let items = set.split(',').map(str::trim);
                 for item in items {
                     let count_and_color: Vec<_> =
                         item.split_whitespace().filter(|v| !v.is_empty()).collect();
