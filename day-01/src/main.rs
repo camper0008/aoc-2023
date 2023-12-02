@@ -1,22 +1,28 @@
 fn first() {
     let input = include_str!("input.txt");
-    let output: usize = input.lines().map(|v| -> usize {
-        let first = v.chars().find(char::is_ascii_digit).unwrap();
-        let last = v.chars().rev().find(char::is_ascii_digit).unwrap();
-        (first.to_string() + &last.to_string()).parse::<usize>().unwrap()
-    })
+    let output: usize = input
+        .lines()
+        .map(|v| -> usize {
+            let first = v.chars().find(char::is_ascii_digit).unwrap();
+            let last = v.chars().rev().find(char::is_ascii_digit).unwrap();
+            (first.to_string() + &last.to_string())
+                .parse::<usize>()
+                .unwrap()
+        })
         .sum();
     println!("first: {output}");
 }
 
 fn second() {
     let input = include_str!("input.txt");
-    let output: usize = input.lines().map(|chars| -> usize {
-        let mut first: Option<String> = None;
-        let mut last: Option<String> = None;
-        let mut idx = 0;
-        loop {
-            match &chars.get(idx..=idx) {
+    let output: usize = input
+        .lines()
+        .map(|chars| -> usize {
+            let mut first: Option<String> = None;
+            let mut last: Option<String> = None;
+            let mut idx = 0;
+            loop {
+                match &chars.get(idx..=idx) {
                 Some(v) if v.chars().last().unwrap().is_ascii_digit() => {
                     if first.is_none() {
                         first = Some((*v).to_string());
@@ -147,14 +153,13 @@ fn second() {
                 Some(_) => idx += 1,
                 None => break,
             };
-        };
-        let first = first.unwrap();
-        let last = last.unwrap_or(first.clone());
-        (first + &last).parse().unwrap()
-    })
+            }
+            let first = first.unwrap();
+            let last = last.unwrap_or(first.clone());
+            (first + &last).parse().unwrap()
+        })
         .sum();
     println!("second: {output}");
-
 }
 
 fn main() {
